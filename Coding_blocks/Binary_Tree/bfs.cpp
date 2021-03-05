@@ -102,6 +102,14 @@ void bfs(node *root)
     return;
 }
 
+int count(node *root)
+{
+    if (root == NULL)
+        return;
+
+    return 1 + count(root->left) + count(root->right);
+}
+
 int main()
 {
     node *root = buildTree();
