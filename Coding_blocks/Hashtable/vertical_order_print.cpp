@@ -20,6 +20,19 @@ public:
     }
 };
 
+//pass by reference
+void verticalOrderPrint(node *root, int d, map<int, vector<int>> &m)
+{
+    //base case
+    if (root == NULL)
+        return;
+
+    m[d].push_back(root->data);
+    verticalOrderPrint(root->left, d - 1, m);
+    verticalOrderPrint(root->right, d + 1, m);
+    return;
+}
+
 int main()
 {
 
@@ -35,4 +48,18 @@ int main()
     root->right->right->right = new node(9);
     root->left->right->right = new node(8);
 
+    map<int, vector<int>> m;
+    int distance = 0;
+    verticalOrderPrint(root, distance, m);
+
+    for (auto p : m)
+    {
+        cout << p.first << "->";
+        
+        for (auto x : p.second)
+        {
+            cout << x << ", ";
+        }
+        cout << endl;
+    }
 }
