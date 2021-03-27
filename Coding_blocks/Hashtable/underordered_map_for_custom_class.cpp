@@ -48,6 +48,9 @@ int main()
     student_map[s3] = 120;
     student_map[s4] = 130;
 
+    //find the marks of student s3
+    cout << student_map[s4] << endl;
+
     for (auto s : student_map)
     {
         cout << s.first.firstname << " " << s.first.rollno << "Marks: " << s.second << endl;
