@@ -1,26 +1,43 @@
 #include <iostream>
-#include <algorithm>
-#include <vector>
+#include <cstring>
+#include <cmath>
 
 using namespace std;
 
 int main()
 {
-    vector<int> a = {1, 2, 2, 1, 5, 7, 7};
-    vector<int> b;
-    int ans = 0;
+    int arr[100000] = {0};
+    int t, n;
+    cin >> t;
 
-    for (int i = 0; i < a.size(); i++)
+    while (t--)
     {
-        b.push_back(a[i]);
+        memset(arr, 0, sizeof arr);
+        string name;
+        int n, rank;
+
+        cin >> n;
+
+        for (int i = 0; i < n; i++)
+        {
+            cin >> name >> rank;
+            arr[rank]++;
+        }
+
+        //Greedy approach - assign the team nearest rank available
+        int actual_rank = 1;
+        int sum = 0;
+        for (int i = 1; i < n; i++)
+        {
+            while (arr[i])
+            {
+                sum += abs(actual_rank - i);
+                arr[i]--;
+                actual_rank++;
+            }
+        }
+        cout << sum << endl;
     }
 
-    sort(b.begin(), b.end());
-
-    for (int i = 0; i < b.size(); i++)
-    {
-        ans += abs(a[i] - b[i]);
-    }
-
-    cout << ans << endl;
+    return 0;
 }
