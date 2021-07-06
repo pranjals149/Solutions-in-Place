@@ -8,6 +8,7 @@
 // 2
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -31,6 +32,39 @@ int countSub(string a, string b, int m, int n)
     }
 
     return countSub(a, b, m - 1, n);
+}
+
+//Bottom UP apprach
+int countBU(string a, string b)
+{
+
+    int m = a.length();
+    int n = b.length();
+
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+
+    //fill the table in bottom up manner
+    for (int i = 0; i <= m; i++)
+    {
+        dp[i][0] = 1;
+    }
+
+    for (int i = 1; i <= m; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            if (a[i - 1] == b[j - 1])
+            {
+                dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+            }
+            else
+            {
+                dp[i][j] = dp[i - 1][j];
+            }
+        }
+    }
+
+    return dp[m][n];
 }
 
 int main()
