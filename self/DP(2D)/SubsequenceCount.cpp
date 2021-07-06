@@ -73,6 +73,7 @@ int main()
     string b = "ABC";
 
     cout << countSub(a, b, a.size() - 1, b.size() - 1) << endl;
+    cout << countBU(a, b) << endl;
 
     return 0;
 }
