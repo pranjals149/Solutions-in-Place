@@ -72,5 +72,5 @@ node *levelOrderBuild()
 
 int main()
 {
-    node *root = buildTree();
+    node *root = levelOrderBuild();
 }
