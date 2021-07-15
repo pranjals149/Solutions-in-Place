@@ -36,50 +36,41 @@ node *buildTree()
     return n;
 }
 
-void levelOrderPrint(node *root)
+node *levelOrderBuild()
 {
+    int d;
+    cin >> d;
+
+    node *root = new node(d);
+
     queue<node *> q;
     q.push(root);
-    q.push(NULL);
 
     while (!q.empty())
     {
-        node *temp = q.front();
+        node *current = q.front();
+        q.pop();
 
-        if (temp == NULL)
+        int c1, c2;
+        cin >> c1 >> c2;
+
+        if (c1 != -1)
         {
-            cout << endl;
-            q.pop();
-            //Inserting a new NULL for the next level
-            if (!q.empty())
-            {
-                q.push(NULL);
-            }
+            current->left = new node(c1);
+            q.push(current->left);
         }
-        else
+
+        if (c2 != -1)
         {
-            q.pop();
-
-            cout << temp->data << " ";
-
-            if (temp->left)
-            {
-                q.push(temp->left);
-            }
-            if (temp->right)
-            {
-                q.push(temp->right);
-            }
+            current->right = new node(c2);
+            q.push(current->right);
         }
     }
 
-    return;
+    return root;
 }
 
 int main()
 {
     node *root = buildTree();
-    levelOrderPrint(root);
-
-    return 0;
 }
