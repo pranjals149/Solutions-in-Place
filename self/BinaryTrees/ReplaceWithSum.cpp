@@ -36,37 +36,33 @@ node *buildTree()
     return n;
 }
 
-int height(node *root)
+int replaceWithSum(node *root)
 {
+
+    //base case
     if (root == NULL)
     {
         return 0;
     }
-
-    int h1 = height(root->left);
-    int h2 = height(root->right);
-    return 1 + max(h1, h2);
-}
-
-//Time complexity - O(n^2)
-int diameter(node *root)
-{
-    if (root == NULL)
+    if (root->left == NULL and root->right == NULL)
     {
-        return 0;
+        return root->data;
     }
 
-    int d1 = height(root->left) + height(root->right);
-    int d2 = diameter(root->left);
-    int d3 = diameter(root->right);
+    //rec case
+    int ls = replaceWithSum(root->left);
+    int rs = replaceWithSum(root->right);
 
-    return max(d1, max(d2, d3));
+    int temp = root->data;
+    root->data = ls + rs;
+
+    return temp + root->data;
 }
 
 int main()
 {
     node *root = buildTree();
-    cout << diameter(root) << endl;
+    cout << replaceWithSum(root);
 
     return 0;
 }
