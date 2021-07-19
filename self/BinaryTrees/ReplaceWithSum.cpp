@@ -63,6 +63,4 @@ int main()
 {
     node *root = buildTree();
     cout << replaceWithSum(root);
-
-    return 0;
 }
